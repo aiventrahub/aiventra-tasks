@@ -7,9 +7,15 @@ document.addEventListener("DOMContentLoaded", async () => {
   USER_ID = window.USER_ID;
   USERNAME = window.USERNAME || "";
 
+  console.log("window.USER_ID =", USER_ID);
+  console.log("window.USERNAME =", USERNAME);
+
+  // Telegram user না পেলে fallback test user
   if (!USER_ID) {
-    alert("Please open from Telegram Bot");
-    return;
+    USER_ID = "123456";
+    USERNAME = "testuser";
+
+    console.log("⚠️ Telegram User Not Found. Using Test User.");
   }
 
   await loadUser();
