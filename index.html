@@ -118,7 +118,8 @@ background:#111827;
 display:flex;
 justify-content:space-around;
 padding:15px;
-}
+  }
+
 
 .bottom-nav a{
 color:white;
@@ -131,7 +132,7 @@ font-size:14px;
 <body>
 
 <div class="header">
-<img src="YOUR_LOGO_URL" class="logo">
+<img src="https://i.postimg.cc/FKRm5Wyf/46595.png" class="logo">
 <div>
 <h2>Aiventra Tasks</h2>
 <p>Earn • Refer • Grow</p>
@@ -140,7 +141,7 @@ font-size:14px;
 
 <div class="balance-card">
 <div class="balance-title">Available Balance</div>
-<div class="balance">250 Coins</div>
+<div class="balance"><span id="coins">250</span> Coins</div>
 </div>
 
 <div class="grid">
@@ -148,7 +149,7 @@ font-size:14px;
 <div class="card">
 <h3>🎁 Daily Reward</h3>
 <p>Claim free coins every day</p>
-<button class="btn">Claim Now</button>
+<button class="btn" onclick="claimReward()">Claim Now</button>
 </div>
 
 <div class="card">
@@ -186,6 +187,38 @@ font-size:14px;
 <a href="#">👥 Refer</a>
 <a href="#">👤 Profile</a>
 </div>
+
+<div class="bottom-nav">
+<a href="#">🏠 Home</a>
+<a href="#">💰 Earn</a>
+<a href="#">👥 Refer</a>
+<a href="#">👤 Profile</a>
+</div>
+
+<script>
+let coins = parseInt(localStorage.getItem("coins")) || 250;
+
+document.getElementById("coins").innerText = coins;
+
+function updateCoins(){
+  document.getElementById("coins").innerText = coins;
+  localStorage.setItem("coins", coins);
+}
+
+function claimReward(){
+  let lastClaim = localStorage.getItem("lastClaim");
+  let now = Date.now();
+
+  if(!lastClaim || (now - parseInt(lastClaim)) >= 86400000){
+    coins += 50;
+    localStorage.setItem("lastClaim", now);
+    updateCoins();
+    alert("🎉 You received 50 coins!");
+  } else {
+    alert("⏳ Daily reward already claimed. Come back tomorrow.");
+  }
+}
+</script>
 
 </body>
 </html>
