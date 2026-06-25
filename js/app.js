@@ -29,4 +29,4 @@ function claimReward() {
         alert("⏳ Daily reward already claimed. Come back tomorrow.");
 
     }
-}
+} 
