@@ -1,4 +1,4 @@
-function joinChannelReward() {
+async function joinChannelReward() {
 
     window.open(
         "https://t.me/aiventrahub",
@@ -19,7 +19,7 @@ function joinChannelReward() {
         "true"
     );
 
-    updateCoins();
+    await updateCoins();
 
     alert("🎉 Telegram Task Completed! +50 Coins");
 }
