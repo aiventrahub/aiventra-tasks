@@ -3,160 +3,55 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
 <title>Aiventra Tasks</title>
 
+<link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
 
-<style>
-*{
-margin:0;
-padding:0;
-box-sizing:border-box;
-font-family:'Poppins',sans-serif;
-}
-
-body{
-background:#0f172a;
-color:white;
-padding:20px;
-}
-
-.header{
-display:flex;
-align-items:center;
-gap:12px;
-margin-bottom:20px;
-}
-
-.logo{
-width:55px;
-height:55px;
-border-radius:50%;
-}
-
-.balance-card{
-background:linear-gradient(135deg,#2563eb,#06b6d4);
-padding:20px;
-border-radius:20px;
-margin-bottom:20px;
-box-shadow:0 10px 25px rgba(0,0,0,.3);
-}
-
-.balance-title{
-font-size:14px;
-opacity:.8;
-}
-
-.balance{
-font-size:32px;
-font-weight:700;
-margin-top:5px;
-}
-
-.grid{
-display:grid;
-grid-template-columns:1fr 1fr;
-gap:15px;
-margin-bottom:20px;
-}
-
-.card{
-background:#1e293b;
-padding:18px;
-border-radius:18px;
-text-align:center;
-}
-
-.card h3{
-font-size:16px;
-margin-bottom:8px;
-}
-
-.btn{
-width:100%;
-background:#2563eb;
-border:none;
-color:white;
-padding:14px;
-border-radius:12px;
-font-size:15px;
-font-weight:600;
-cursor:pointer;
-margin-top:10px;
-}
-
-.tasks{
-background:#1e293b;
-padding:18px;
-border-radius:18px;
-margin-bottom:20px;
-}
-
-.task{
-display:flex;
-justify-content:space-between;
-align-items:center;
-padding:12px 0;
-border-bottom:1px solid rgba(255,255,255,.08);
-}
-
-.task:last-child{
-border:none;
-}
-
-.reward{
-color:#22c55e;
-font-weight:600;
-}
-
-.bottom-nav{
-position:fixed;
-bottom:0;
-left:0;
-right:0;
-background:#111827;
-display:flex;
-justify-content:space-around;
-padding:15px;
-  }
-
-
-.bottom-nav a{
-color:white;
-text-decoration:none;
-font-size:14px;
-}
-</style>
+<link rel="stylesheet" href="css/style.css">
 </head>
 
 <body>
 
 <div class="header">
-<img src="https://i.postimg.cc/FKRm5Wyf/46595.png" class="logo">
-<div>
-<h2>Aiventra Tasks</h2>
-<p>Earn • Refer • Grow</p>
-</div>
+    <img src="https://i.postimg.cc/FKRm5Wyf/46595.png" class="logo">
+
+    <div>
+        <h2>Aiventra Tasks</h2>
+        <p>Earn • Refer • Grow</p>
+    </div>
 </div>
 
 <div class="balance-card">
-<div class="balance-title">Available Balance</div>
-<div class="balance"><span id="coins">250</span> Coins</div>
+    <div class="balance-title">
+        Available Balance
+    </div>
+
+    <div class="balance">
+        <span id="coins">250</span> Coins
+    </div>
 </div>
 
 <div class="grid">
 
-<div class="card">
-<h3>🎁 Daily Reward</h3>
-<p>Claim free coins every day</p>
-<button class="btn" onclick="claimReward()">Claim Now</button>
-</div>
+    <div class="card">
+        <h3>🎁 Daily Reward</h3>
+        <p>Claim free coins every day</p>
 
-<div class="card">
-<h3>📺 Watch Ads</h3>
-<p>Earn extra rewards</p>
-<button class="btn">Watch</button>
-</div>
+        <button class="btn" onclick="claimReward()">
+            Claim Now
+        </button>
+    </div>
+
+    <div class="card">
+        <h3>📺 Watch Ads</h3>
+        <p>Earn extra rewards</p>
+
+        <button class="btn">
+            Watch
+        </button>
+    </div>
 
 </div>
 
@@ -165,73 +60,48 @@ font-size:14px;
 <h3>🔥 Available Tasks</h3>
 
 <div class="task">
-<span>Join Telegram Channel</span>
-<span class="reward">+50</span>
+    <div class="task-left">
+        <span>📢</span>
+        <span>Join Telegram Channel</span>
+    </div>
+
+    <button class="task-btn" onclick="joinChannelReward()">
+        +50
+    </button>
 </div>
 
 <div class="task">
-<span>Visit Partner Site</span>
-<span class="reward">+30</span>
+    <div class="task-left">
+        <span>🌐</span>
+        <span>Visit Partner Site</span>
+    </div>
+
+    <span class="reward">+30</span>
 </div>
 
 <div class="task">
-<a href="https://t.me/aiventrahub" target="_blank" onclick="joinChannelReward()">
-Join Telegram Channel
-</a>
-<span class="reward">+50</span>
+    <div class="task-left">
+        <span>👥</span>
+        <span>Invite Friends</span>
+    </div>
+
+    <span class="reward">+100</span>
 </div>
 
 </div>
 
 <div class="bottom-nav">
-<a href="#">🏠 Home</a>
-<a href="#">💰 Earn</a>
-<a href="#">👥 Refer</a>
-<a href="#">👤 Profile</a>
+    <a href="#">🏠 Home</a>
+    <a href="#">💰 Earn</a>
+    <a href="#">👥 Refer</a>
+    <a href="#">👤 Profile</a>
 </div>
 
-<div class="bottom-nav">
-<a href="#">🏠 Home</a>
-<a href="#">💰 Earn</a>
-<a href="#">👥 Refer</a>
-<a href="#">👤 Profile</a>
-</div>
-
-<script>
-let coins = parseInt(localStorage.getItem("coins")) || 250;
-
-document.getElementById("coins").innerText = coins;
-
-function updateCoins(){
-  document.getElementById("coins").innerText = coins;
-  localStorage.setItem("coins", coins);
-}
-
-function claimReward(){
-  let lastClaim = localStorage.getItem("lastClaim");
-  let now = Date.now();
-
-  if(!lastClaim || (now - parseInt(lastClaim)) >= 86400000){
-    coins += 50;
-    localStorage.setItem("lastClaim", now);
-    updateCoins();
-    alert("🎉 You received 50 coins!");
-  } else {
-    alert("⏳ Daily reward already claimed. Come back tomorrow.");
-  }
-}
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 
-<script>
-const supabaseUrl = "https://ykqbvjbufjfxzfripvsc.supabase.co";
-const supabaseKey = "sb_publishable_eL3hNCXeks12CHT4oC-p3g_id2GwoV3";
+<script src="js/supabase.js"></script>
+<script src="js/tasks.js"></script>
+<script src="js/app.js"></script>
 
-const supabase = window.supabase.createClient(
-  supabaseUrl,
-  supabaseKey
-);
-
-console.log("Supabase Connected");
-</script>
 </body>
 </html>
