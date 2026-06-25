@@ -1,32 +1,66 @@
-let coins = parseInt(localStorage.getItem("coins")) || 250;
+let coins = 0;
+const USER_ID = "123456"; // পরে Telegram ID হবে
 
-document.addEventListener("DOMContentLoaded", () => {
-    document.getElementById("coins").innerText = coins;
+document.addEventListener("DOMContentLoaded", async () => {
+  await loadUser();
 });
 
-function updateCoins() {
+async function loadUser() {
+  const { data, error } = await window.supabaseClient
+    .from("users")
+    .select("*")
+    .eq("telegram_id", USER_ID)
+    .single();
+
+  if (data) {
+    coins = data.coins || 0;
     document.getElementById("coins").innerText = coins;
-    localStorage.setItem("coins", coins);
+  } else {
+    const { data: newUser } = await window.supabaseClient
+      .from("users")
+      .insert([
+        {
+          telegram_id: USER_ID,
+          username: "testuser",
+          coins: 250,
+          referrals: 0
+        }
+      ])
+      .select()
+      .single();
+
+    coins = 250;
+    document.getElementById("coins").innerText = coins;
+  }
 }
 
-function claimReward() {
+async function updateCoins() {
+  document.getElementById("coins").innerText = coins;
 
-    let lastClaim = localStorage.getItem("lastClaim");
-    let now = Date.now();
+  await window.supabaseClient
+    .from("users")
+    .update({ coins: coins })
+    .eq("telegram_id", USER_ID);
+}
 
-    if (!lastClaim || (now - parseInt(lastClaim)) >= 86400000) {
+async function claimReward() {
 
-        coins += 50;
+  let lastClaim = localStorage.getItem("lastClaim");
+  let now = Date.now();
 
-        localStorage.setItem("lastClaim", now);
+  if (!lastClaim || (now - parseInt(lastClaim)) >= 86400000) {
 
-        updateCoins();
+    coins += 50;
 
-        alert("🎉 Daily Reward Claimed! +50 Coins");
+    localStorage.setItem("lastClaim", now);
 
-    } else {
+    await updateCoins();
 
-        alert("⏳ Daily reward already claimed. Come back tomorrow.");
+    alert("🎉 Daily Reward Claimed! +50 Coins");
 
-    }
-} 
+  } else {
+
+    alert("⏳ Daily reward already claimed. Come back tomorrow.");
+
+  }
+}
