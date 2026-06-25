@@ -1,27 +1,41 @@
 let coins = 0;
-const USER_ID = "123456"; // পরে Telegram ID হবে
+let USER_ID = null;
+let USERNAME = "";
 
 document.addEventListener("DOMContentLoaded", async () => {
+
+  USER_ID = window.USER_ID;
+  USERNAME = window.USERNAME || "";
+
+  if (!USER_ID) {
+    alert("Please open from Telegram Bot");
+    return;
+  }
+
   await loadUser();
 });
 
 async function loadUser() {
-  const { data, error } = await window.supabaseClient
+
+  const { data } = await window.supabaseClient
     .from("users")
     .select("*")
     .eq("telegram_id", USER_ID)
     .single();
 
   if (data) {
+
     coins = data.coins || 0;
     document.getElementById("coins").innerText = coins;
+
   } else {
+
     const { data: newUser } = await window.supabaseClient
       .from("users")
       .insert([
         {
           telegram_id: USER_ID,
-          username: "testuser",
+          username: USERNAME,
           coins: 250,
           referrals: 0
         }
@@ -29,17 +43,20 @@ async function loadUser() {
       .select()
       .single();
 
-    coins = 250;
+    coins = newUser.coins;
     document.getElementById("coins").innerText = coins;
   }
 }
 
 async function updateCoins() {
+
   document.getElementById("coins").innerText = coins;
 
   await window.supabaseClient
     .from("users")
-    .update({ coins: coins })
+    .update({
+      coins: coins
+    })
     .eq("telegram_id", USER_ID);
 }
 
